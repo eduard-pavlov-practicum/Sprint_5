@@ -29,18 +29,13 @@ def open_register_form(driver):
     Фикстура открытия диалога регистрации.
     """
     WebDriverWait(driver, 3).until(
-        expected_conditions.visibility_of_element_located((StartPageLocators.ENTER_AND_REGISTER_BUTTON['by'],
-                                                           StartPageLocators.ENTER_AND_REGISTER_BUTTON['locator'])))
-    driver.find_element(StartPageLocators.ENTER_AND_REGISTER_BUTTON['by'],
-                        StartPageLocators.ENTER_AND_REGISTER_BUTTON['locator']).click()
+        expected_conditions.visibility_of_element_located(StartPageLocators.ENTER_AND_REGISTER_BUTTON))
+    driver.find_element(*StartPageLocators.ENTER_AND_REGISTER_BUTTON).click()
     WebDriverWait(driver, 3).until(
-        expected_conditions.visibility_of_element_located((LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['by'],
-                                                           LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['locator'])))
-    driver.find_element(LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['by'],
-                        LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['locator']).click()
+        expected_conditions.visibility_of_element_located(LoginDialogLocators.HAVENT_ACCOUNT_BUTTON))
+    driver.find_element(*LoginDialogLocators.HAVENT_ACCOUNT_BUTTON).click()
     WebDriverWait(driver, 3).until(
-        expected_conditions.visibility_of_element_located((RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['by'],
-                                                           RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['locator'])))
+        expected_conditions.visibility_of_element_located(RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON))
     return driver
 
 
@@ -71,18 +66,13 @@ def open_register_form_for_existing_user(driver):
     Фикстура открытия диалога регистрации.
     """
     WebDriverWait(driver, 3).until(
-        expected_conditions.visibility_of_element_located((StartPageLocators.ENTER_AND_REGISTER_BUTTON['by'],
-                                                           StartPageLocators.ENTER_AND_REGISTER_BUTTON['locator'])))
-    driver.find_element(StartPageLocators.ENTER_AND_REGISTER_BUTTON['by'],
-                        StartPageLocators.ENTER_AND_REGISTER_BUTTON['locator']).click()
+        expected_conditions.visibility_of_element_located(StartPageLocators.ENTER_AND_REGISTER_BUTTON))
+    driver.find_element(*StartPageLocators.ENTER_AND_REGISTER_BUTTON).click()
     WebDriverWait(driver, 3).until(
-        expected_conditions.visibility_of_element_located((LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['by'],
-                                                           LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['locator'])))
-    driver.find_element(LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['by'],
-                        LoginDialogLocators.HAVENT_ACCOUNT_BUTTON['locator']).click()
+        expected_conditions.visibility_of_element_located(LoginDialogLocators.HAVENT_ACCOUNT_BUTTON))
+    driver.find_element(*LoginDialogLocators.HAVENT_ACCOUNT_BUTTON).click()
     WebDriverWait(driver, 3).until(
-        expected_conditions.visibility_of_element_located((RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['by'],
-                                                           RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['locator'])))
+        expected_conditions.visibility_of_element_located(RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON))
     return driver
 
 
@@ -94,23 +84,22 @@ def registered_user_email(open_register_form, random_email, password):
     """
     driver = open_register_form
 
-    driver.find_element(RegistrationDialogLocators.EMAIL_FIELD['by'],
-                        RegistrationDialogLocators.EMAIL_FIELD['locator']).send_keys(random_email)
-    driver.find_element(RegistrationDialogLocators.PASSWORD_FIELD['by'],
-                        RegistrationDialogLocators.PASSWORD_FIELD['locator']).send_keys(password)
-    driver.find_element(RegistrationDialogLocators.PASSWORD_CONFIRMATION_FIELD['by'],
-                        RegistrationDialogLocators.PASSWORD_CONFIRMATION_FIELD['locator']).send_keys(password)
-    driver.find_element(RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['by'],
-                        RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['locator']).click()
+    driver.find_element(
+        *RegistrationDialogLocators.EMAIL_FIELD).send_keys(random_email)
+    driver.find_element(
+        *RegistrationDialogLocators.PASSWORD_FIELD).send_keys(password)
+    driver.find_element(
+        *RegistrationDialogLocators.PASSWORD_CONFIRMATION_FIELD).send_keys(password)
+    driver.find_element(
+        *RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON).click()
 
     WebDriverWait(driver, 3).until(
-        expected_conditions.invisibility_of_element_located((RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['by'],
-                                                             RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON['locator'])))
+        expected_conditions.invisibility_of_element_located(RegistrationDialogLocators.CREATE_ACCOUNT_BUTTON))
 
     driver.delete_all_cookies()
 
     driver.find_element(
-        StartPageLocators.LOGOUT_BUTTON['by'], StartPageLocators.LOGOUT_BUTTON['locator']).click()
+        *StartPageLocators.LOGOUT_BUTTON).click()
 
     return random_email
 
@@ -126,10 +115,8 @@ def open_login_form(driver):
     Фикстура открытия диалога логина.
     """
     WebDriverWait(driver, 3).until(
-        expected_conditions.visibility_of_element_located((StartPageLocators.ENTER_AND_REGISTER_BUTTON['by'],
-                                                           StartPageLocators.ENTER_AND_REGISTER_BUTTON['locator'])))
-    driver.find_element(StartPageLocators.ENTER_AND_REGISTER_BUTTON['by'],
-                        StartPageLocators.ENTER_AND_REGISTER_BUTTON['locator']).click()
+        expected_conditions.visibility_of_element_located(StartPageLocators.ENTER_AND_REGISTER_BUTTON))
+    driver.find_element(*StartPageLocators.ENTER_AND_REGISTER_BUTTON).click()
     return driver
 
 
@@ -139,16 +126,14 @@ def login_user(registered_user_email, open_login_form, password):
     Фикстура логина пользователя.
     """
     driver = open_login_form
-    driver.find_element(LoginDialogLocators.EMAIL_FIELD['by'],
-                        LoginDialogLocators.EMAIL_FIELD['locator']).send_keys(registered_user_email)
-    driver.find_element(LoginDialogLocators.PASSWORD_FIELD['by'],
-                        LoginDialogLocators.PASSWORD_FIELD['locator']).send_keys(password)
+    driver.find_element(
+        *LoginDialogLocators.EMAIL_FIELD).send_keys(registered_user_email)
+    driver.find_element(
+        *LoginDialogLocators.PASSWORD_FIELD).send_keys(password)
 
-    driver.find_element(LoginDialogLocators.ENTER_BUTTON['by'],
-                        LoginDialogLocators.ENTER_BUTTON['locator']).click()
+    driver.find_element(*LoginDialogLocators.ENTER_BUTTON).click()
     WebDriverWait(driver, 3, 1).until(
-        expected_conditions.invisibility_of_element_located((LoginDialogLocators.ENTER_BUTTON['by'],
-                                                             LoginDialogLocators.ENTER_BUTTON['locator'])))
+        expected_conditions.invisibility_of_element_located(LoginDialogLocators.ENTER_BUTTON))
 
     return driver
 

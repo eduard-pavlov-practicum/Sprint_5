@@ -8,17 +8,15 @@ class TestLogin:
 
     def test_login_successful(self, registered_user_email, password, open_login_form):
         driver = open_login_form
-        driver.find_element(LoginDialogLocators.EMAIL_FIELD['by'],
-                            LoginDialogLocators.EMAIL_FIELD['locator']).send_keys(registered_user_email)
-        driver.find_element(LoginDialogLocators.PASSWORD_FIELD['by'],
-                            LoginDialogLocators.PASSWORD_FIELD['locator']).send_keys(password)
+        driver.find_element(
+            *LoginDialogLocators.EMAIL_FIELD).send_keys(registered_user_email)
+        driver.find_element(
+            *LoginDialogLocators.PASSWORD_FIELD).send_keys(password)
 
-        driver.find_element(LoginDialogLocators.ENTER_BUTTON['by'],
-                            LoginDialogLocators.ENTER_BUTTON['locator']).click()
+        driver.find_element(*LoginDialogLocators.ENTER_BUTTON).click()
         WebDriverWait(driver, 3).until(
-            expected_conditions.invisibility_of_element_located((LoginDialogLocators.ENTER_BUTTON['by'],
-                                                                 LoginDialogLocators.ENTER_BUTTON['locator'])))
+            expected_conditions.invisibility_of_element_located((LoginDialogLocators.ENTER_BUTTON)))
         assert driver.find_element(
-            StartPageLocators.AVATAR['by'], StartPageLocators.AVATAR['locator']).is_displayed
+            *StartPageLocators.AVATAR).is_displayed
         assert driver.find_element(
-            StartPageLocators.NAME['by'], StartPageLocators.NAME['locator']).text == 'User.'
+            *StartPageLocators.NAME).text == 'User.'
