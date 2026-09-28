@@ -2,21 +2,22 @@ import pytest
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from locators import StartPageLocators, AdvertisementFormLocators, ProfilePageLocators
+from helpers import Helpers as h
 
 
 class TestPushAdvertisement:
 
-    def test_push_advertisement_authorized_user_adverisement_visible(self, login_user, new_advert_name, new_advert_description, new_advert_price):
+    def test_push_advertisement_authorized_user_adverisement_visible(self, login_user):
         driver = login_user
         driver.find_element(*StartPageLocators.PUSH_AD_BUTTON).click()
         WebDriverWait(driver, 3).until(
             expected_conditions.visibility_of_element_located(AdvertisementFormLocators.NAME_INPUT))
         driver.find_element(
-            *AdvertisementFormLocators.NAME_INPUT).send_keys(new_advert_name)
+            *AdvertisementFormLocators.NAME_INPUT).send_keys(h.new_advert_name)
         driver.find_element(
-            *AdvertisementFormLocators.DESCRIPTION_TEXTAREA).send_keys(new_advert_description)
+            *AdvertisementFormLocators.DESCRIPTION_TEXTAREA).send_keys(h.new_advert_description)
         driver.find_element(
-            *AdvertisementFormLocators.PRICE_INPUT).send_keys(new_advert_price)
+            *AdvertisementFormLocators.PRICE_INPUT).send_keys(h.new_advert_price)
         unselected_button = driver.find_element(
             *AdvertisementFormLocators.CONDITION_RADIO_UNSLECTED)
         WebDriverWait(driver, 3).until(
@@ -46,7 +47,7 @@ class TestPushAdvertisement:
         WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located(
             ProfilePageLocators.MY_ADS_HEADING))
         assert driver.find_element(
-            *ProfilePageLocators.TARGET_ADVERTISEMENT).text == new_advert_name
+            *ProfilePageLocators.TARGET_ADVERTISEMENT).text == h.new_advert_name
 
     def test_push_advertisement_not_authorized_user_modal_view_visible(self, driver):
 
