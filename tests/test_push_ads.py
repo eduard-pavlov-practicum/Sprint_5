@@ -52,7 +52,7 @@ class TestPushAdvertisement:
 
         driver.find_element(
             *StartPageLocators.PUSH_AD_BUTTON).click()
-        WebDriverWait(driver, 3).until(
-            expected_conditions.visibility_of_element_located(StartPageLocators.MODAL_VIEW))
-
-        assert driver.find_element(*StartPageLocators.MODAL_VIEW).is_displayed
+        assert WebDriverWait(driver, 3).until(
+            expected_conditions.visibility_of_element_located(
+                StartPageLocators.MODAL_VIEW)
+        ).is_displayed()
