@@ -77,8 +77,8 @@ def registered_user_email(open_register_form):
 
     driver.find_element(
         *StartPageLocators.LOGOUT_BUTTON).click()
-
-    return random_email
+    existing_user_email = random_email
+    return existing_user_email
 
 
 @pytest.fixture
