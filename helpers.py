@@ -1,6 +1,8 @@
 import uuid
 
 
+BASE_URL = "https://qa-desk.education-services.ru/"
+
 class EmailGenerator:
     def __get__(self, obj, objtype=None):
         _uid = uuid.uuid4().hex

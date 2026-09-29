@@ -4,10 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from locators import StartPageLocators, RegistrationDialogLocators, LoginDialogLocators
-from helpers import Helpers as h
-
-
-BASE_URL = "https://qa-desk.education-services.ru/"
+from helpers import Helpers as h, BASE_URL
 
 
 @pytest.fixture
